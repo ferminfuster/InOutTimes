@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InOutTime - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="module" src="js/dashboard.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabecera de usuario -->
+        <div class="user-header">
+            <div class="logo">
+                <img src="images/logo.png" alt="InOutTime Logo">
+            </div>
+            <div class="user-info">
+                <h2 id="nombreUser">Cargando...</h2>
+                <p id="emailUser">Cargando...</p>
+                <p id="empresaUser">Cargando...</p>
+            </div>
+        </div>
+
+        <!-- Panel de Usuario -->
+        <div class="panel-title">
+            <h3>Panel de Usuario</h3>
+        </div>
+        <div class="fichaje-buttons">
+            <button id="btnEntrada" class="button entry-button" onclick="registrarEntrada()">
+                <i class="fas fa-sign-in-alt"></i> Registrar Entrada
+            </button>
+            <button id="btnSalida" class="button exit-button" onclick="registrarSalida()">
+                <i class="fas fa-sign-out-alt"></i> Registrar Salida
+            </button>
+            <button id="btnIncidencia" class="button incidence-button" onclick="registrarIncidencia()">
+                <i class="fas fa-exclamation-triangle"></i> Registrar Incidencia
+            </button>
+        </div>
+
+        <!-- Opciones de usuario -->
+        <div class="secondary-actions">
+            <button class="button main-button" onclick="cambiarPassword()">
+                <i class="fas fa-key"></i> Cambiar Contraseña
+            </button>
+            <button class="button main-button" onclick="generarInforme()">
+                <i class="fas fa-file-alt"></i> Mis Informes
+            </button>
+            <button class="button main-button" onclick="LogOut()">
+                <i class="fas fa-power-off"></i> Cerrar Sesión
+            </button>
+        </div>
+
+        <!-- Opciones Administrativas (solo visible para administradores) -->
+        <div id="admin-buttons" class="secondary-actions" style="display: none;">
+            <div class="panel-title">
+                <h3>Panel de administrador</h3>
+            </div>
+            <button class="button main-button" onclick="abrirModalUsuario()">
+                <i class="fas fa-user-plus"></i> Crear Usuario
+            </button>
+            <button class="button main-button" onclick="eliminarUsuario()">
+                <i class="fas fa-user-times"></i> Eliminar Usuario
+            </button>
+            <button class="button main-button" onclick="resetearUsuario()">
+                <i class="fas fa-key"></i> Resetear Contraseña
+            </button>
+            <button class="button main-button" onclick="verInformes()">
+                <i class="fas fa-file-alt"></i> Ver Informes Globales
+            </button>
+        </div>
+
+        <!-- Modal para Crear o Editar Usuario -->
+        <div id="modalCrearUsuario" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModal('modalCrearUsuario')">&times;</span>
+                <h2>Crear Usuario</h2>
+                <form id="formCrearUsuario">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                    
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni" required>
+                    
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="empresa">Empresa:</label>
+                    <select id="empresa" name="empresa" required>
+                        <option value="">Seleccionar Empresa</option>
+                        <!-- Las opciones se cargarán dinámicamente -->
+                    </select>
+                    
+                    <label for="rol">Rol:</label>
+                    <select id="rol" name="rol" required>
+                        <option value="user">Usuario</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                    
+                    <button type="submit" class="button">Crear Usuario</button>
+                </form>
+            </div>
+        </div>
+
+        <script type="module">
+            import { 
+                abrirModalUsuario, 
+                cerrarModal, 
+                crearUsuario, 
+                LogOut 
+            } from './js/dashboard.js';
+
+            // Hacer las funciones globales
+            window.abrirModalUsuario = abrirModalUsuario;
+            window.cerrarModal = cerrarModal;
+            window.crearUsuario = crearUsuario;
+            window.LogOut = LogOut;
+        </script>
+    </div>
+</body>
+</html>
